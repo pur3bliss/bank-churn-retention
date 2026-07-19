@@ -78,8 +78,6 @@ A Flask web app where a relationship manager enters a customer's profile and rec
 
 The results page features a gauge visualization where the color bands and tick marks are placed at the model's **actual decision thresholds** (not arbitrary round numbers) — the same 81%-recall cutoff, and the 40%/70% tier boundaries, that drive the underlying logic.
 
-### Screenshots
-*(add screenshots of the form page and results page here)*
 
 ---
 
@@ -118,8 +116,7 @@ bank-churn-retention-app/
 ├── app.py
 ├── churn_model.joblib
 ├── requirements.txt
-├── notebook/
-│   └── bank_churn_analysis.ipynb
+├── project_new.ipynb
 ├── templates/
 │   ├── index.html
 │   └── result.html
