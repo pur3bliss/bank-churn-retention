@@ -95,8 +95,8 @@ The results page features a gauge visualization where the color bands and tick m
 ## Running Locally
 
 ```bash
-git clone <your-repo-url>
-cd bank-churn-retention-app
+git clone https://github.com/pur3bliss/bank-churn-retention
+cd bank-churn-retention
 pip install -r requirements.txt
 python app.py
 ```
@@ -115,7 +115,7 @@ Then open `http://127.0.0.1:5000` in your browser.
 ## Project Structure
 
 ```
-bank-churn-retention-app/
+bank-churn-retention/
 ├── app.py
 ├── churn_model.joblib
 ├── requirements.txt
