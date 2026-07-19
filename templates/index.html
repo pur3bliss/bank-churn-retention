@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Retention Intelligence — Churn Risk Assessment</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
+    <p class="eyebrow">Retention Intelligence System</p>
+    <h1>Customer Churn Risk Assessment</h1>
+    <p class="subtitle">Enter a customer's profile to estimate their probability of churn and get a recommended action.</p>
+
+    <form class="card" action="/predict" method="POST">
+      <p class="section-label">Demographics</p>
+      <div class="grid">
+        <div class="field">
+          <label for="age">Age</label>
+          <input type="number" id="age" name="age" min="18" max="100" value="40" required>
+        </div>
+        <div class="field">
+          <label for="gender">Gender</label>
+          <select id="gender" name="gender" required>
+            <option value="Female">Female</option>
+            <option value="Male">Male</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="tenure">Tenure (years with bank)</label>
+          <input type="number" id="tenure" name="tenure" min="0" max="15" value="3" required>
+        </div>
+      </div>
+
+      <p class="section-label">Account Profile</p>
+      <div class="grid">
+        <div class="field">
+          <label for="credit_score">Credit Score</label>
+          <input type="number" id="credit_score" name="credit_score" min="300" max="900" value="650" required>
+        </div>
+        <div class="field">
+          <label for="balance">Account Balance ($)</label>
+          <input type="number" id="balance" name="balance" min="0" step="0.01" value="75000" required>
+        </div>
+        <div class="field">
+          <label for="num_products">Number of Products</label>
+          <select id="num_products" name="num_products" required>
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="estimated_salary">Estimated Annual Salary ($)</label>
+          <input type="number" id="estimated_salary" name="estimated_salary" min="0" step="0.01" value="90000" required>
+        </div>
+        <div class="field full">
+          <div class="checkbox-row">
+            <input type="checkbox" id="has_cr_card" name="has_cr_card" checked>
+            <label for="has_cr_card">Has a credit card</label>
+          </div>
+          <div class="checkbox-row">
+            <input type="checkbox" id="is_active_member" name="is_active_member" checked>
+            <label for="is_active_member">Active member</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="submit-row">
+        <button type="submit" class="primary">Assess Risk →</button>
+      </div>
+    </form>
+  </div>
+</body>
+</html>

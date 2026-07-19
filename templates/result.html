@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Churn Risk Result</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="wrap">
+    <a class="back-link" href="/">← New assessment</a>
+    <p class="eyebrow">Retention Intelligence System</p>
+    <h1>Churn Risk Result</h1>
+    <p class="subtitle">Gauge bands mark the model's actual decision thresholds — 14.8% (retention queue), 40% (Medium), 70% (High).</p>
+
+    <div class="gauge-card">
+      <svg class="gauge-svg" viewBox="0 0 300 165" xmlns="http://www.w3.org/2000/svg">
+        <!-- Risk bands, precomputed to match CHURN_THRESHOLD=14.8, Medium=40, High=70 -->
+        <path d="M 20.0 150.0 A 130 130 0 0 1 33.8 91.7" stroke="#2E7D5B" stroke-width="18" fill="none" stroke-linecap="butt"/>
+        <path d="M 33.8 91.7 A 130 130 0 0 1 109.8 26.4" stroke="#3E7A8C" stroke-width="18" fill="none" stroke-linecap="butt"/>
+        <path d="M 109.8 26.4 A 130 130 0 0 1 226.4 44.8" stroke="#C98A2C" stroke-width="18" fill="none" stroke-linecap="butt"/>
+        <path d="M 226.4 44.8 A 130 130 0 0 1 280.0 150.0" stroke="#B33F3F" stroke-width="18" fill="none" stroke-linecap="butt"/>
+
+        <!-- Threshold tick marks -->
+        <line x1="51.7" y1="100.7" x2="33.8" y2="91.7" stroke="#0B1E33" stroke-width="2"/>
+        <line x1="116.0" y1="45.4" x2="109.8" y2="26.4" stroke="#0B1E33" stroke-width="2"/>
+        <line x1="214.7" y1="61.0" x2="226.4" y2="44.8" stroke="#0B1E33" stroke-width="2"/>
+
+        <!-- Needle -->
+        <g class="needle" style="transform: rotate({{ needle_rotation }}deg);">
+          <line x1="150" y1="150" x2="150" y2="35" stroke="#0B1E33" stroke-width="3"/>
+          <circle cx="150" cy="150" r="8" fill="#0B1E33"/>
+        </g>
+      </svg>
+
+      <div class="gauge-reading">
+        <div class="probability-figure">{{ probability }}%</div>
+        <div class="probability-label">Probability of Churn</div>
+      </div>
+
+      <div class="risk-badge {{ risk_level.lower() }}">{{ risk_level }} Risk</div>
+    </div>
+
+    <div class="recommendation-card">
+      <p class="section-label">Recommendation</p>
+      <p class="recommendation-text">{{ recommendation }}</p>
+      <p class="queue-status">Retention outreach queue: <strong>{{ "Yes" if flagged else "No" }}</strong></p>
+    </div>
+
+    <div class="snapshot">
+      <p class="section-label">Customer Snapshot</p>
+      <dl class="snapshot-grid">
+        <div class="snapshot-item"><dt>Age</dt><dd>{{ customer.Age }}</dd></div>
+        <div class="snapshot-item"><dt>Gender</dt><dd>{{ customer.Gender }}</dd></div>
+        <div class="snapshot-item"><dt>Tenure</dt><dd>{{ customer.Tenure }} yrs</dd></div>
+        <div class="snapshot-item"><dt>Credit Score</dt><dd>{{ customer.CreditScore }}</dd></div>
+        <div class="snapshot-item"><dt>Balance</dt><dd>${{ "{:,.0f}".format(customer.Balance) }}</dd></div>
+        <div class="snapshot-item"><dt>Products</dt><dd>{{ customer.NumOfProducts }}</dd></div>
+        <div class="snapshot-item"><dt>Est. Salary</dt><dd>${{ "{:,.0f}".format(customer.EstimatedSalary) }}</dd></div>
+        <div class="snapshot-item"><dt>Active Member</dt><dd>{{ "Yes" if customer.IsActiveMember else "No" }}</dd></div>
+      </dl>
+    </div>
+  </div>
+</body>
+</html>
